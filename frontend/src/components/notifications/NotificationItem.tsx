@@ -84,7 +84,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification, onDel
   };
 
   const style = getTypeStyle(notification.type);
-
+// console.log('Notification type:', notification.type, 'Style:', style);
   return (
     <div
       className={`group border-l-4 ${style.border} ${style.bg} p-4 sm:p-5 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-700/30 transition-all duration-200 active:scale-[0.99]`}
