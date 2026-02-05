@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { TagManager } from '../../components/tasks/TagManager';
 import { useAuth } from '../../context/AuthContext';
 import { Tag } from '../../components/tasks/TaskForm';
-import { API_URL } from '@/lib/api';
+import { API_URL } from '../../lib/api';
 
 const TagListPage = () => {
   const { user } = useAuth();

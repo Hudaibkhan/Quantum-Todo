@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { TaskDisplayItem, FilterState } from '../../types/task.types';
 import { filterTasks, extractUniqueTags } from '../../utils/filter-utils';
-import { API_URL } from '@/lib/api';
+import { API_URL } from '../../lib/api';
 
 interface Task {
   id: string;
