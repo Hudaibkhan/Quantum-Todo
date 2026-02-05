@@ -37,8 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const fetchUser = async () => {
     try {
-      // The BACKEND_URL should be set to include /api, so http://localhost:8000/api
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
       const response = await fetch(`${BACKEND_URL}/auth/me`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -63,7 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (identifier: string, password: string) => {
     setLoading(true);
     try {
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
 
       const response = await fetch(`${BACKEND_URL}/auth/login`, {
         method: 'POST',
@@ -111,7 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (email: string, username: string, password: string) => {
     setLoading(true);
     try {
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
 
       const response = await fetch(`${BACKEND_URL}/auth/register`, {
         method: 'POST',
@@ -174,7 +173,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     // Optionally call backend logout endpoint
-    const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+    const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
     fetch(`${BACKEND_URL}/auth/logout`, {
       method: 'POST',
       headers: {

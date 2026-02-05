@@ -27,7 +27,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       const token = localStorage.getItem('token');
       if (token) {
-        const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+        const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
         const response = await fetch(`${BACKEND_URL}/tasks`, {
           headers: {
             'Authorization': `Bearer ${token}`,

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { TagManager } from '../../components/tasks/TagManager';
 import { useAuth } from '../../context/AuthContext';
 import { Tag } from '../../components/tasks/TaskForm';
+import { API_URL } from '../../lib/api';
 
 const TagListPage = () => {
   const { user } = useAuth();
@@ -17,7 +18,7 @@ const TagListPage = () => {
       throw new Error('No authentication token found');
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api'}${endpoint}`, {
+    const response = await fetch(`${API_URL}${endpoint}`, {
       ...options,
       headers: {
         'Authorization': `Bearer ${token}`,
