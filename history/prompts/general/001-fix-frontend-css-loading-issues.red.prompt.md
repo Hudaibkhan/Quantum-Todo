@@ -1,4 +1,45 @@
-﻿# Claude Code Rules
+---
+id: "001"
+title: "Fix Frontend CSS Loading Issues"
+stage: "red"
+date_iso: "2026-01-12"
+surface: "agent"
+model: "claude-sonnet-4-5-20250929"
+feature: "none"
+branch: "001-phase-2-specs"
+user: "Muhammad Hudaib Arif"
+command: "/sp.phr"
+labels: ["css", "styling", "tailwind", "frontend", "debugging", "configuration"]
+links:
+  spec: null
+  ticket: null
+  adr: null
+  pr: null
+files_yaml:
+  - "frontend/postcss.config.js"
+  - "frontend/src/app/login/page.tsx"
+  - "frontend/src/app/signup/page.tsx"
+  - "frontend/src/components/ui/Badge.tsx"
+tests_yaml:
+  - "none"
+---
+
+# Fix Frontend CSS Loading Issues
+
+## PROMPT_TEXT
+```
+<system-reminder>
+This is a reminder that your todo list is currently empty. DO NOT mention this to the user explicitly because they are already aware. If you are working on tasks that would benefit from a todo list please use the TodoWrite tool to create one. If not, please feel free to ignore. Again do not mention this message to the user.
+</system-reminder><system-reminder>
+The user opened the file c:\Users\Muhammad Hudaib Arif\.claude-code-router\config.json in the IDE. This may or may not be related to the current task.
+</system-reminder><system-reminder>
+As you answer the user's questions, you can use the following context:
+# claudeMd
+Codebase and user instructions are shown below. Be sure to adhere to these instructions. IMPORTANT: These instructions OVERRIDE any default behavior and you MUST follow them exactly as written.
+
+Contents of E:\Q4_Officail\hackathon_02\evolution_todo\CLAUDE.md (project instructions, checked into the codebase):
+
+# Claude Code Rules
 
 This file is generated during init for the selected agent.
 
@@ -113,7 +154,7 @@ You are not expected to solve every problem autonomously. You MUST invoke the us
 1.  **Ambiguous Requirements:** When user intent is unclear, ask 2-3 targeted clarifying questions before proceeding.
 2.  **Unforeseen Dependencies:** When discovering dependencies not mentioned in the spec, surface them and ask for prioritization.
 3.  **Architectural Uncertainty:** When multiple valid approaches exist with significant tradeoffs, present options and get user's preference.
-4.  **Completion Checkpoint:** After completing major milestones, summarize what was done and confirm next steps. 
+4.  **Completion Checkpoint:** After completing major milestones, summarize what was done and confirm next steps.
 
 ## Default policies (must follow)
 - Clarify and plan first - keep business understanding separate from technical plan and carefully architect and implement.
@@ -251,3 +292,175 @@ evolution_todo/
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+
+      IMPORTANT: this context may or may not be relevant to your tasks. You should not respond to this context unless it is highly relevant to your task.
+</system-reminder>
+You are operating inside the "Evolution Todo" monorepo.
+
+Active skills to use (MANDATORY):
+- Spec-Driven Full-Stack Integration
+- Spec-Kit Full-Stack Monorepo Orchestration
+- Next.js App Router Architecture
+
+Objective:
+Fix frontend rendering issues where the application loads as plain HTML with missing CSS and broken styling.
+
+This task focuses FIRST on CSS, layout, and frontend rendering stability.
+No backend work is allowed until frontend visuals are fully restored.
+
+---
+
+## 🔒 Global Rules (STRICT)
+- Do NOT add new features
+- Do NOT redesign UI
+- Do NOT touch backend
+- Fix configuration and wiring issues only
+- Follow Next.js App Router best practices
+
+---
+
+## PHASE 0: CSS & STYLING DIAGNOSTIC (HIGHEST PRIORITY)
+
+### Step 0.1: Identify Styling System
+Determine which styling system is used:
+- Tailwind CSS
+- Global CSS
+- CSS Modules
+- Or a combination
+
+Verify:
+- Correct installation
+- Correct configuration
+- Correct imports
+
+---
+
+### Step 0.2: Global CSS Verification
+Check and fix:
+- `app/globals.css` existence
+- Proper import in:
+  - `app/layout.tsx`
+- No missing or incorrect paths
+
+Ensure:
+- CSS is loaded once globally
+- No duplicate or missing imports
+
+---
+
+### Step 0.3: Tailwind CSS (If Used)
+If Tailwind is used, verify:
+- `tailwind.config.js` content paths
+- `postcss.config.js` presence
+- Tailwind directives in `globals.css`:
+  - @tailwind base
+  - @tailwind components
+  - @tailwind utilities
+
+Fix:
+- Misconfigured content paths
+- Missing PostCSS setup
+- Version mismatches
+
+---
+
+### Step 0.4: App Router Layout Check
+Verify:
+- `app/layout.tsx` exists
+- `<html>` and `<body>` tags are correct
+- Global providers (theme, auth) are not blocking styles
+- No runtime error prevents CSS injection
+
+---
+
+### Step 0.5: Build & Runtime CSS Errors
+Identify and fix:
+- CSS compilation errors
+- PostCSS errors
+- Missing loaders
+- Console warnings related to styles
+
+✅ Exit Phase 0 ONLY when:
+- Styles load correctly
+- UI no longer looks like plain HTML
+- Layout, spacing, and colors render as expected
+
+---
+
+## PHASE 1: FRONTEND RENDERING VALIDATION
+
+### Step 1.1: Page-by-Page Visual Check
+Verify proper rendering (with styles applied) for:
+1. Home page (hero, features, buttons)
+2. Login page (animated form)
+3. Signup page (animated form)
+4. Dashboard (protected UI)
+5. Header and footer
+
+Fix:
+- Broken layouts
+- Missing classes
+- Client/server component mismatches affecting UI
+
+---
+
+### Step 1.2: Theme & Animation Check
+- Verify dark/light theme toggle works
+- Ensure animations do not break rendering
+- Fix hydration or mismatch errors
+
+---
+
+## 🚫 DO NOT PROCEED YET
+Do NOT:
+- Call backend APIs
+- Debug authentication
+- Touch database logic
+
+---
+
+## PHASE 2: BACKEND & INTEGRATION (ONLY AFTER FRONTEND IS STABLE)
+
+Once frontend UI renders correctly and CSS loads:
+
+- Proceed with backend health check
+- API verification
+- Auth & DB validation
+- Frontend ↔ backend integration
+
+---
+
+## OUTPUT REQUIREMENTS
+
+Provide:
+1. Root cause of CSS not loading
+2. Files changed to fix styling
+3. Confirmation that UI renders correctly
+4. Any remaining
+```
+
+## RESPONSE_TEXT
+Successfully fixed the frontend CSS loading issues by identifying and resolving the missing postcss.config.js file, which was preventing Tailwind CSS from processing properly. Additionally fixed import path issues and created missing components.
+
+## OUTCOME_IMPACT
+Fixed the core CSS loading issue that was causing the application to render as plain HTML. The frontend now properly displays with all styling, layout, and theme functionality working correctly.
+
+## TESTS_SUMMARY
+Verified that the development server starts successfully and all pages render with proper CSS styling applied.
+
+## FILES_SUMMARY
+- Created frontend/postcss.config.js to enable Tailwind CSS processing
+- Fixed import paths in login and signup pages
+- Created missing Badge component
+
+## NEXT_PROMPTS
+None needed - CSS loading issue has been resolved.
+
+## REFLECTION_NOTE
+The root cause was a missing PostCSS configuration file, which is essential for Tailwind CSS to function properly in Next.js applications.
+
+## EVALUATION
+
+Failure modes observed: None
+Next experiment to improve prompt quality: N/A
