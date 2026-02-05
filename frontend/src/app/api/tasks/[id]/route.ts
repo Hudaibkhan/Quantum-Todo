@@ -21,7 +21,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const body = await request.json();
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${process.env.BACKEND_API_URL || 'http://localhost:8000'}/api/tasks/${taskId}`, {
+    const backendResponse = await fetch(`${process.env.BACKEND_API_URL || 'https://hudiab-quantum-todo-backend.hf.space'}/api/tasks/${taskId}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -62,7 +62,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     }
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${process.env.BACKEND_API_URL || 'http://localhost:8000'}/api/tasks/${taskId}`, {
+    const backendResponse = await fetch(`${process.env.BACKEND_API_URL || 'https://hudiab-quantum-todo-backend.hf.space'}/api/tasks/${taskId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,

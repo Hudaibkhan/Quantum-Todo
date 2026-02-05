@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${process.env.BACKEND_API_URL || 'http://localhost:8000'}/api/tasks`, {
+    const backendResponse = await fetch(`${process.env.BACKEND_API_URL || 'https://hudiab-quantum-todo-backend.hf.space'}/api/tasks`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${process.env.BACKEND_API_URL || 'http://localhost:8000'}/api/tasks`, {
+    const backendResponse = await fetch(`${process.env.BACKEND_API_URL || 'https://hudiab-quantum-todo-backend.hf.space'}/api/tasks`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,

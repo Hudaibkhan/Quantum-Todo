@@ -17,7 +17,7 @@ const TagListPage = () => {
       throw new Error('No authentication token found');
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}${endpoint}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api'}${endpoint}`, {
       ...options,
       headers: {
         'Authorization': `Bearer ${token}`,

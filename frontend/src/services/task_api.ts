@@ -1,7 +1,7 @@
 import { Task, TaskFormData } from '../types/task';
 
 // Define API base URL - this would typically come from environment variables
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
 
 interface GetTasksParams {
   completed?: boolean;

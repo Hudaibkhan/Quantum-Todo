@@ -43,7 +43,7 @@ const TaskManagerPage: React.FC = () => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+          const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
           const response = await fetch(`${BACKEND_URL}/tasks`, {
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -78,7 +78,7 @@ const TaskManagerPage: React.FC = () => {
         const token = localStorage.getItem('token');
         if (token) {
           setTagsLoading(true);
-          const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+          const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
           const response = await fetch(`${BACKEND_URL}/tags`, {
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -157,7 +157,7 @@ const TaskManagerPage: React.FC = () => {
         return;
       }
 
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
       const priorityValue = taskData.priority.charAt(0).toUpperCase() + taskData.priority.slice(1);
 
       const response = await fetch(`${BACKEND_URL}/tasks`, {
@@ -205,7 +205,7 @@ const TaskManagerPage: React.FC = () => {
 
       const priorityValue = taskData.priority.charAt(0).toUpperCase() + taskData.priority.slice(1);
 
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
       console.log('Making PUT request to update task:', `${BACKEND_URL}/tasks/${editingTask.id}`);
 
       const response = await fetch(`${BACKEND_URL}/tasks/${editingTask.id}`, {
@@ -258,7 +258,7 @@ const TaskManagerPage: React.FC = () => {
         return;
       }
 
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
       console.log('Making PATCH request to complete task:', `${BACKEND_URL}/tasks/${taskId}/complete`);
 
       const response = await fetch(`${BACKEND_URL}/tasks/${taskId}/complete?completed=${!task.completed}`, {
@@ -347,7 +347,7 @@ const TaskManagerPage: React.FC = () => {
         return;
       }
 
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
       console.log('Making DELETE request to:', `${BACKEND_URL}/tasks/${taskId}`);
 
       const response = await fetch(`${BACKEND_URL}/tasks/${taskId}`, {
