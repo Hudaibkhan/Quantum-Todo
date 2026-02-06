@@ -5,7 +5,7 @@ export const API_BASE_URL =
 
 // Ensure the URL always uses HTTPS and has proper formatting
 const ensureHttps = (url: string): string => {
-  // Remove trailing slash if present, we'll add it back consistently
+  // Remove trailing slash if present, we'll handle it in the request
   let cleanUrl = url.endsWith('/') ? url.slice(0, -1) : url;
 
   // Ensure it starts with https://
@@ -15,8 +15,7 @@ const ensureHttps = (url: string): string => {
     cleanUrl = 'https://' + cleanUrl;
   }
 
-  // Add trailing slash for API consistency
-  return cleanUrl + '/';
+  return cleanUrl;
 };
 
 export const API_URL = ensureHttps(API_BASE_URL);
@@ -55,8 +54,9 @@ export class ClientApiClient {
       config.body = JSON.stringify(body);
     }
 
-    // Ensure the full URL is constructed with HTTPS
-    let fullUrl = `${this.baseUrl}${endpoint}`;
+    // Properly construct URL to avoid double slashes
+    let cleanEndpoint = endpoint.startsWith('/') ? endpoint.substring(1) : endpoint;
+    let fullUrl = `${this.baseUrl}/${cleanEndpoint}`;
 
     // Double-check HTTPS before making the request
     if (fullUrl.startsWith('http://')) {
