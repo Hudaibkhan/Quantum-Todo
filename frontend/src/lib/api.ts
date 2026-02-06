@@ -13,6 +13,11 @@ const ensureHttps = (url: string): string => {
 
 export const API_URL = ensureHttps(API_BASE_URL);
 
+// Log the API URL to help with debugging
+if (typeof window !== 'undefined') {
+  console.log("Using API Base URL:", API_URL);
+}
+
 interface ApiOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   body?: any;

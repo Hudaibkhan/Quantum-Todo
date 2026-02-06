@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+import { API_URL } from '../../../../lib/api';
 
 // This route handler will handle dynamic routes like /api/tasks/[id]
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -21,7 +22,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const body = await request.json();
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api'}/tasks/${taskId}`, {
+    const backendResponse = await fetch(`${API_URL}/tasks/${taskId}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -62,7 +63,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     }
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api'}/tasks/${taskId}`, {
+    const backendResponse = await fetch(`${API_URL}/tasks/${taskId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,

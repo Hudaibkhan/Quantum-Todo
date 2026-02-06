@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
+import { API_URL } from '../lib/api';
 
 interface User {
   id: string;
@@ -37,8 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const fetchUser = async () => {
     try {
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
-      const response = await fetch(`${BACKEND_URL}/auth/me`, {
+      const response = await fetch(`${API_URL}/auth/me`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -62,9 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (identifier: string, password: string) => {
     setLoading(true);
     try {
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
-
-      const response = await fetch(`${BACKEND_URL}/auth/login`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('token', data.access_token);
 
       // Fetch user data to update state
-      const userResponse = await fetch(`${BACKEND_URL}/auth/me`, {
+      const userResponse = await fetch(`${API_URL}/auth/me`, {
         headers: {
           'Authorization': `Bearer ${data.access_token}`
         }
@@ -110,9 +108,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (email: string, username: string, password: string) => {
     setLoading(true);
     try {
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
-
-      const response = await fetch(`${BACKEND_URL}/auth/register`, {
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -128,7 +124,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       // Registration returns user data directly, not a token
       // We need to login to get the token
-      const loginResponse = await fetch(`${BACKEND_URL}/auth/login`, {
+      const loginResponse = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -146,7 +142,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('token', loginData.access_token);
 
       // Fetch user data to update state
-      const userResponse = await fetch(`${BACKEND_URL}/auth/me`, {
+      const userResponse = await fetch(`${API_URL}/auth/me`, {
         headers: {
           'Authorization': `Bearer ${loginData.access_token}`
         }
@@ -173,8 +169,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     // Optionally call backend logout endpoint
-    const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
-    fetch(`${BACKEND_URL}/auth/logout`, {
+    fetch(`${API_URL}/auth/logout`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,

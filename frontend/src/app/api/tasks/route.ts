@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+import { API_URL } from '../../../lib/api';
 
 export async function GET(request: NextRequest) {
   try {
@@ -14,7 +15,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api'}`, {
+    const backendResponse = await fetch(`${API_URL}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api'}`, {
+    const backendResponse = await fetch(`${API_URL}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,

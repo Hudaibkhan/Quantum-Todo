@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Task } from '../../types/notification'; // Import Task from the same file
 import { generateNotificationsFromTasks, SimpleNotification } from '../../utils/simple-notifications';
 import NotificationList from '../notifications/NotificationList';
+import { API_URL } from '../../lib/api';
 
 export default function NotificationPage() {
   const { user, loading: authLoading } = useAuth();
@@ -18,8 +19,7 @@ export default function NotificationPage() {
       try {
         const token = localStorage.getItem('token');
         if (token && user) {
-          const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://hudiab-quantum-todo-backend.hf.space/api';
-          const response = await fetch(`${BACKEND_URL}/tasks`, {
+          const response = await fetch(`${API_URL}/tasks`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',

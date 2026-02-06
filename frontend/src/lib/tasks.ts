@@ -1,4 +1,5 @@
 import { TaskFormData } from '../components/tasks/TaskForm';
+import { API_URL } from './api';
 
 // Define the Task type to match what the backend returns
 export interface Task {
@@ -30,7 +31,7 @@ class TaskService implements TaskApiService {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+    this.baseUrl = API_URL;
   }
 
   async getTasks(token: string, skip: number = 0, limit: number = 100): Promise<TaskListResponse> {
