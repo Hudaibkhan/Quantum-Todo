@@ -3,12 +3,20 @@ export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||
   "https://hudiab-quantum-todo-backend.hf.space/api";
 
-// Ensure the URL always uses HTTPS
+// Ensure the URL always uses HTTPS and has proper formatting
 const ensureHttps = (url: string): string => {
-  if (url.startsWith('http://')) {
-    return url.replace('http://', 'https://');
+  // Remove trailing slash if present, we'll add it back consistently
+  let cleanUrl = url.endsWith('/') ? url.slice(0, -1) : url;
+
+  // Ensure it starts with https://
+  if (cleanUrl.startsWith('http://')) {
+    cleanUrl = cleanUrl.replace('http://', 'https://');
+  } else if (!cleanUrl.startsWith('https://')) {
+    cleanUrl = 'https://' + cleanUrl;
   }
-  return url;
+
+  // Add trailing slash for API consistency
+  return cleanUrl + '/';
 };
 
 export const API_URL = ensureHttps(API_BASE_URL);
@@ -47,7 +55,15 @@ export class ClientApiClient {
       config.body = JSON.stringify(body);
     }
 
-    const response = await fetch(`${this.baseUrl}${endpoint}`, config);
+    // Ensure the full URL is constructed with HTTPS
+    let fullUrl = `${this.baseUrl}${endpoint}`;
+
+    // Double-check HTTPS before making the request
+    if (fullUrl.startsWith('http://')) {
+      fullUrl = fullUrl.replace('http://', 'https://');
+    }
+
+    const response = await fetch(fullUrl, config);
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
