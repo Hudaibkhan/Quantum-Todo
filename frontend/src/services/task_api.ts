@@ -1,9 +1,6 @@
 import { Task, TaskFormData } from '../types/task';
 import { API_URL } from '../lib/api';
 
-// Define API base URL - using centralized configuration
-const API_BASE_URL = API_URL;
-
 interface GetTasksParams {
   completed?: boolean;
   priority?: string;
@@ -19,7 +16,7 @@ class TaskApi {
    */
   static async createTask(taskData: TaskFormData): Promise<Task> {
     try {
-      const response = await fetch(`${API_BASE_URL}/tasks`, {
+      const response = await fetch(`${API_URL}/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +58,7 @@ class TaskApi {
       }
 
       const queryString = queryParams.toString();
-      const url = `${API_BASE_URL}/tasks${queryString ? `?${queryString}` : ''}`;
+      const url = `${API_URL}/tasks${queryString ? `?${queryString}` : ''}`;
 
       const response = await fetch(url, {
         headers: {
@@ -93,7 +90,7 @@ class TaskApi {
    */
   static async getTaskById(taskId: string): Promise<Task> {
     try {
-      const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+      const response = await fetch(`${API_URL}/tasks/${taskId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -122,7 +119,7 @@ class TaskApi {
    */
   static async updateTask(taskId: string, taskData: Partial<TaskFormData>): Promise<Task> {
     try {
-      const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+      const response = await fetch(`${API_URL}/tasks/${taskId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -153,7 +150,7 @@ class TaskApi {
    */
   static async toggleTaskCompletion(taskId: string, completed: boolean): Promise<Task> {
     try {
-      const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+      const response = await fetch(`${API_URL}/tasks/${taskId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -187,7 +184,7 @@ class TaskApi {
    */
   static async deleteTask(taskId: string): Promise<void> {
     try {
-      const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+      const response = await fetch(`${API_URL}/tasks/${taskId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
