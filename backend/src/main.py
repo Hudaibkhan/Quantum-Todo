@@ -22,7 +22,8 @@ logger = logging.getLogger(__name__)
 app = FastAPI(
     title="Evolution Todo API",
     description="RESTful API for Evolution Todo (Hackathon Phase II)",
-    version="1.0.0"
+    version="1.0.0",
+    redirect_slashes=False
 )
 
 # Include routers

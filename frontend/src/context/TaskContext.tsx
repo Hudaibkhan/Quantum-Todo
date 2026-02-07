@@ -28,7 +28,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       const token = localStorage.getItem('token');
       if (token) {
-        const response = await fetch(`${API_URL}/tasks`, {
+        const response = await fetch(`${API_URL}/tasks/`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',

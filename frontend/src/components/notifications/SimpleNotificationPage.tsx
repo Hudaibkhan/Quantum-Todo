@@ -19,7 +19,7 @@ export default function NotificationPage() {
       try {
         const token = localStorage.getItem('token');
         if (token && user) {
-          const response = await fetch(`${API_URL}/tasks`, {
+          const response = await fetch(`${API_URL}/tasks/`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',

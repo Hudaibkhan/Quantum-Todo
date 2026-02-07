@@ -44,7 +44,7 @@ const TaskManagerPage: React.FC = () => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await fetch(`${API_URL}/tasks`, {
+          const response = await fetch(`${API_URL}/tasks/`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
@@ -148,6 +148,9 @@ const TaskManagerPage: React.FC = () => {
     })));
   }, [tasks]);
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
   const handleCreateTask = async (taskData: TaskFormData) => {
     try {
       const token = localStorage.getItem('token');
@@ -156,9 +159,12 @@ const TaskManagerPage: React.FC = () => {
         return;
       }
 
+      setErrorMessage(null);
+      setSuccessMessage(null);
+
       const priorityValue = taskData.priority.charAt(0).toUpperCase() + taskData.priority.slice(1);
 
-      const response = await fetch(`${API_URL}/tasks`, {
+      const response = await fetch(`${API_URL}/tasks/`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -179,10 +185,17 @@ const TaskManagerPage: React.FC = () => {
       if (response.ok) {
         const newTask = await response.json();
         setTasks(prev => [newTask, ...prev]);
+        setSuccessMessage('Task created successfully ✅');
+        // Clear success message after 3 seconds
+        setTimeout(() => setSuccessMessage(null), 3000);
       } else {
-        console.error('Failed to create task:', response.status);
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage = errorData.detail || `Failed to create task: ${response.status}`;
+        setErrorMessage(errorMessage);
+        console.error('Failed to create task:', response.status, errorData);
       }
     } catch (error) {
+      setErrorMessage('An error occurred while creating the task. Please try again.');
       console.error('Failed to create task:', error);
     }
   };

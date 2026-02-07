@@ -16,7 +16,7 @@ class TaskApi {
    */
   static async createTask(taskData: TaskFormData): Promise<Task> {
     try {
-      const response = await fetch(`${API_URL}/tasks`, {
+      const response = await fetch(`${API_URL}/tasks/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ class TaskApi {
       }
 
       const queryString = queryParams.toString();
-      const url = `${API_URL}/tasks${queryString ? `?${queryString}` : ''}`;
+      const url = `${API_URL}/tasks/${queryString ? `?${queryString}` : ''}`;
 
       const response = await fetch(url, {
         headers: {

@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${API_URL}`, {
+    const backendResponse = await fetch(`${API_URL}/tasks/`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     // Forward the request to the backend
-    const backendResponse = await fetch(`${API_URL}`, {
+    const backendResponse = await fetch(`${API_URL}/tasks/`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,

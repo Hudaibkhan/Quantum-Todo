@@ -258,6 +258,7 @@ const TaskForm: React.FC<TaskFormProps> = ({
           error={errors.description}
           placeholder="Enter task description (optional)"
           rows={3}
+          required
         />
       </div>
 
@@ -288,6 +289,7 @@ const TaskForm: React.FC<TaskFormProps> = ({
                 : 'border-slate-200 dark:border-slate-700 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 hover:border-slate-300 dark:hover:border-slate-600'
             }
           `}
+          required
         >
           <option value="low">Low</option>
           <option value="medium">Medium</option>
@@ -313,6 +315,7 @@ const TaskForm: React.FC<TaskFormProps> = ({
           onChange={handleDateChange}
           error={errors.due_date}
           placeholder="Select due date"
+          required
         />
       </div>
 
